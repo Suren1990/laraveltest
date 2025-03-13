@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\NewUser;
@@ -23,11 +24,9 @@ class LoginStoreController extends Controller
             'email' => $attributes['email'],
             'password' => $attributes['password'],
         ])) {
-            // Если аутентификация не удалась, возвращаем пользователя на страницу регистрации
             return redirect('/registration');
         }
 
-        // Перегенерация сессии после успешной аутентификации
         request()->session()->regenerate();
 
         // Перенаправление на страницу dashboard после успешной аутентификации

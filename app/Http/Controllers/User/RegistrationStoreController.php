@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewUser;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class RegistrationStoreController extends Controller
  
          $attributes['password'] = Hash::make($attributes['password']);
          $user = NewUser::create($attributes);
-         Auth::login($user);
+        //  Auth::login($user);
          return redirect('/');
      }
 }

@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-class PostUpdateController extends Controller
+
+class PostStoreController extends Controller
 {
-    public function __invoke(Post $post){
+    public function __invoke(){
         $data = request()->validate([
             'title' =>'string',
             'post_content' => 'string',
         ]);
-        $post->update($data);
+        Post::create($data);
         return redirect('posts');
     }
 }
