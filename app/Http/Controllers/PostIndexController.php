@@ -8,7 +8,8 @@ use App\Models\Post;
 class PostIndexController extends Controller
 {
     public function __invoke(){
-        $posts = Post::all();
+        $posts = Post::paginate(6);
+
         return view('post.index', compact('posts'));
     }
 }

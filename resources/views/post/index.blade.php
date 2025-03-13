@@ -16,6 +16,12 @@
 
             </div>
             @endforeach
+            
         </div>
+        <div class="flex justify-center mt-8">
+    <div class="flex justify-center mt-8>"
+        {{$posts->links()}}
+    </div>
+</div>
     </div>
 @endsection
