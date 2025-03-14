@@ -1,11 +1,7 @@
 <?php
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Users\RegistrationStoreController;
-use App\Http\Controllers\Users\RegistrationCreateController;
-use App\Http\Controllers\Users\LoginCreateController;
-use App\Http\Controllers\Users\LoginStoreController;
-use App\Http\Controllers\Users\LoginDestroyController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +12,31 @@ use App\Http\Controllers\Users\LoginDestroyController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+// */
+Route::get('/main','App\Http\Controllers\User\HomeController@index');
+Route::get('/','App\Http\Controllers\User\HomeController@index')->name('home');
 
-Route::get('/main', function () {
-    return view('user.home');
-});
-
-Route::get('/', function () {
-    return view('user.home');
-})->name('home');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->middleware('auth');
 
 
-Route::get('/registration','App\Http\Controllers\RegistrationCreateController')->name('registration');;
-Route::post('/registration','App\Http\Controllers\RegistrationStoreController');
+Route::get('/registration','App\Http\Controllers\User\RegistrationCreateController')->name('registration');
+Route::post('/registration','App\Http\Controllers\User\RegistrationStoreController');
 
-Route::get('/login','App\Http\Controllers\LoginCreateController')->name('login');
-Route::post('/login','App\Http\Controllers\LoginStoreController');
+Route::get('/login','App\Http\Controllers\User\LoginCreateController')->name('login');
+Route::post('/login','App\Http\Controllers\User\LoginStoreController');
 
-Route::post('/logout', 'App\Http\Controllers\LoginDestroyController')->name('logout');;
+Route::post('/logout', 'App\Http\Controllers\User\LoginDestroyController')->name('logout');
+
+
+Route::get('/posts','App\Http\Controllers\Post\PostIndexController')->name('post.index');
+Route::get('/posts/create','App\Http\Controllers\Post\PostCreateController')->name('post.create');
+Route::post('/posts','App\Http\Controllers\Post\PostStoreController')->name('post.store');
+Route::get('/posts/{post}', 'App\Http\Controllers\Post\PostShowController')->name('post.show');
+Route::get('/posts/{post}/edit', 'App\Http\Controllers\Post\PostEditController')->name('post.edit');
+Route::patch('/posts/{post}/edit', 'App\Http\Controllers\Post\PostUpdateController')->name('post.update');
+Route::delete('/posts/{post}', 'App\Http\Controllers\Post\PostDestroyController')->name('post.delete');
+
 
