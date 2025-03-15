@@ -3,7 +3,7 @@
         <div class="bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
             <h2 class="text-3xl font-semibold text-center text-gray-900 mb-6">Create Account</h2>
             
-            <form action="/registration" method="post">
+            <form action="{{route('registration')}}" method="post">
             @csrf
                 <div class="mb-6">
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>

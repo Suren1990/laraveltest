@@ -14,9 +14,12 @@
             <a href="{{ route('home') }}">My Website</a> 
             </h1>
             <nav>
+                
                 <a href="{{ route('home') }}" class="ml-6 text-lg text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out">Home</a>
                 <a href="{{ route('registration') }}" class="ml-6 text-lg text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out">Register</a>
                 <a href="{{ route('login') }}" class="ml-6 text-lg text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out">Login</a>
+
+
             </nav>
         </div>
     </header>
@@ -27,3 +30,11 @@
 
 </body>
 </html>
+
+
+
+
+
+
+              
+                    
