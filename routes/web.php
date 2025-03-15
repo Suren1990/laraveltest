@@ -1,8 +1,9 @@
 <?php
-use Illuminate\Support\Arr;
+
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,30 +14,26 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 // */
-Route::get('/main','App\Http\Controllers\User\HomeController@index');
-Route::get('/','App\Http\Controllers\User\HomeController@index')->name('home');
+Route::middleware(['guest'])->get('/',[HomeController::class, 'index'])->name('home');
 
+Route::middleware(['guest'])->prefix('registration')->group(function () {
+    Route::get('/',[AuthController::class, 'createRegistration'])->name('create.registration');
+    Route::post('/',[AuthController::class, 'storeRegistration'])->name('store.registration');
+});
 
-Route::get('/dashboard', function () {
-    return view('user.dashboard');
-})->middleware('auth');
+Route::middleware(['guest'])->prefix('login')->group(function () {
+    Route::get('/',[AuthController::class, 'createLogin'])->name('create.login');
+    Route::post('/',[AuthController::class, 'storeLogin'])->name('store.login');
+});
 
+Route::post('/logout', [AuthController::class, 'loginDestroy'])->name('logout');
 
-Route::get('/registration','App\Http\Controllers\User\RegistrationCreateController')->name('registration');
-Route::post('/registration','App\Http\Controllers\User\RegistrationStoreController');
-
-Route::get('/login','App\Http\Controllers\User\LoginCreateController')->name('login');
-Route::post('/login','App\Http\Controllers\User\LoginStoreController');
-
-Route::post('/logout', 'App\Http\Controllers\User\LoginDestroyController')->name('logout');
-
-
-Route::get('/posts','App\Http\Controllers\Post\PostIndexController')->name('post.index');
-Route::get('/posts/create','App\Http\Controllers\Post\PostCreateController')->name('post.create');
-Route::post('/posts','App\Http\Controllers\Post\PostStoreController')->name('post.store');
-Route::get('/posts/{post}', 'App\Http\Controllers\Post\PostShowController')->name('post.show');
-Route::get('/posts/{post}/edit', 'App\Http\Controllers\Post\PostEditController')->name('post.edit');
-Route::patch('/posts/{post}/edit', 'App\Http\Controllers\Post\PostUpdateController')->name('post.update');
-Route::delete('/posts/{post}', 'App\Http\Controllers\Post\PostDestroyController')->name('post.delete');
-
-
+Route::middleware(['auth'])->prefix('posts')->group(function () {
+    Route::get('/',[PostController::class, 'index'])->name('post.index');
+    Route::get('/create',[PostController::class, 'create'])->name('post.create');
+    Route::post('/',[PostController::class, 'store'])->name('post.store');
+    Route::get('/{post}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::patch('/{post}/edit', [PostController::class, 'update'])->name('post.update');
+    Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.delete');
+});

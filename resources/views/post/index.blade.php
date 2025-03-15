@@ -12,6 +12,8 @@
             <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition duration-300 ease-in-out">
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{$post->id}}. {{$post->title}}</h3>
                 <p class="text-lg text-gray-600 mb-4">{{$post->post_content}}</p>
+                <h3 class="text-1xl font-semibold text-red-800 mb-4">Created By: {{ $post->creator ? $post->creator->username : 'Unknown' }}</h3>
+                <h3 class="text-1xl font-semibold text-red-800 mb-4"> {{ $post->updater ?  'Updaeted By :'.($post->updater->username):''}}</h3>
                 <a href="{{ route('post.show', $post->id) }}" class="text-blue-500 hover:text-blue-700 transition duration-300">Change Post</a>
 
             </div>

@@ -21,6 +21,9 @@
                 <h3 class="text-2xl font-semibold text-gray-800">{{$post->id}}. {{$post->title}}</h3>
                 <div class="flex space-x-2">
                     <!-- Edit Button -->
+                    <a href="{{ route('post.store', $post->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">
+                        Back
+                    </a>
                     <a href="{{ route('post.edit', $post->id)}}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
                         Edit
                     </a>
@@ -28,7 +31,7 @@
                     <form method="POST" action="{{ route('post.delete', $post->id)}}" onsubmit="return confirm('Are you sure you want to delete this post?');">
                         @csrf
                         @method('DELETE')
-                        
+        
                         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
                             Delete
                         </button>

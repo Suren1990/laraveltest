@@ -15,7 +15,11 @@
         <textarea id="post" name="post_content" class="w-full p-3 border border-gray-300 rounded-lg" rows="5" required></textarea>
     </div>
 
-    <div class="flex justify-center">
+    <div class="flex justify-center space-x-4">
+        <a  href="{{ route('post.index')}}" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300 inline-flex items-center justify-center md-3">
+            Back
+        </a>
         <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Submit</button>
+</div>   
 </form>
 @endsection

@@ -16,7 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('post_content');
             $table->timestamps();
-        });
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id', 'post_user_fkn')
+                  ->references('id')
+                  ->on('users');
+            $table->unsignedBigInteger('updated_by')->nullable(); // Добавляем поле updated_by
+            $table->foreign('updated_by')->references('id')->on('users');
+            });
     }
 
     /**
