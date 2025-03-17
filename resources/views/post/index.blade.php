@@ -1,13 +1,34 @@
 @extends('user.dashboard')
 @section('title', 'Post')
 @section('content')
+
 <div class="container mx-auto p-8">
-<div class="flex justify-end mb-6">
+    <div class="flex justify-end mb-6">
         <a href="{{ route('post.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Create New Post</a>
+    </div>
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Select Author</h2>
+        <form method="GET" action="{{ route('post.index') }}" class="mb-6 flex space-x-4">
+        <select name="author" class="px-4 py-2 border rounded-md">
+            <option value="">All Author</option>
+            @foreach($users as $user)
+            <option value="{{ $user->id }}" 
+            {{ (old('author') == $user->id || request()->input('author') == $user->id) ? 'selected' : '' }}>
+            {{ $user->username }}
+        </option>
+            @endforeach
+        </select>
+        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Filter</button>
+        <div class="ml-auto flex items-center space-x-2">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by title and post" class="px-2 py-2 border rounded-md w-48">
+                <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300">Search</button>
+            </div>
+            <button type="reset" onclick="window.location='{{ route('post.index') }}'" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300">Reset</button>    
+    </form>
+    <div class="fixed right-10 top-45">
     </div>
         <h2 class="text-3xl font-semibold text-gray-900 mb-6">Latest Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+        
             @foreach($posts as $post)
             <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition duration-300 ease-in-out">
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{$post->id}}. {{$post->title}}</h3>
@@ -22,8 +43,11 @@
         </div>
         <div class="flex justify-center mt-8">
     <div class="flex justify-center mt-8>"
-        {{$posts->links()}}
+        {{$posts->withQueryString()->links()}}
     </div>
 </div>
     </div>
+
+
+
 @endsection

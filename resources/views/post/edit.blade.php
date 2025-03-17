@@ -8,11 +8,16 @@
     <div class="mb-4">
         <label for="title" class="block text-gray-700 text-lg font-semibold mb-2">Title</label>
         <input type="text" id="title" name="title" class="w-full p-3 border border-gray-300 rounded-lg" value="{{ old('title', $post->title) }}" required>
+        @error('title')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
     </div>
-
     <div class="mb-4">
         <label for="post" class="block text-gray-700 text-lg font-semibold mb-2">Post Content</label>
-        <textarea id="post" name="post_content" class="w-full p-3 border border-gray-300 rounded-lg" rows="5" required>{{ old('description', $post->post_content) }}</textarea>
+        <textarea id="post" name="post_content" class="w-full p-3 border border-gray-300 rounded-lg" rows="5" required>{{ old('description', $post->post_content)}}</textarea>
+        @error('post_content')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
     </div>
     <div class="flex justify-center space-x-4">
         <a href="{{ route('post.show', $post->id)}}" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300 inline-flex items-center justify-center">

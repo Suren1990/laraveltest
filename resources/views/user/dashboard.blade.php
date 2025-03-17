@@ -25,7 +25,7 @@
             </nav>
         </div>
     </header>
-    <main class="flex items-center justify-center min-h-screen">
+    <main class="items-center justify-center min-h-screen">
     @yield('content')
     </main>
 </body>

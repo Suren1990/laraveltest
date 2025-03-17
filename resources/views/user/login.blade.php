@@ -7,10 +7,16 @@
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
                     <input type="email" id="email" name="email" required class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 transition duration-200">
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input type="password" id="password" name="password" required class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 transition duration-200">
+                    @error('password')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <button type="submit" class="w-full bg-gray-900 text-white py-3 rounded-lg shadow-md hover:bg-gray-800 transition duration-300 ease-in-out">Login</button>
             </form>

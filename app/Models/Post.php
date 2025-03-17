@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    // protected $fillable = ['title', 'post_content']; 
+
     public function creator(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
@@ -34,5 +34,18 @@ class Post extends Model
                 $post->updated_by = Auth::id();
             }
         });
-    }   
+    } 
+    
+    public function scopeByAuthor($query, $user_id) // scope for User
+    {
+        return $query->where('user_id', $user_id);
+    }
+
+    public function scopeSearch($query, $search) // scope for Search
+{
+    return $query->where(function ($query) use ($search) {
+        $query->where('title', 'like', '%' . $search . '%')
+              ->orWhere('post_content', 'like', '%' . $search . '%');
+    });
+}
 }
