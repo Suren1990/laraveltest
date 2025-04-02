@@ -27,6 +27,9 @@
                 </div>
             </div>
             <p class="text-lg text-gray-600 mb-4">{{$post->post_content}}</p>
+            @foreach($post->tags as $tag)
+                <span class="text-blue-500">#{{ $tag->title }}</span>
+            @endforeach 
         </div>
     </div>
 </div>

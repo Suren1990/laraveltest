@@ -24,6 +24,8 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'post_content' => 'required|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ];
     }
 }

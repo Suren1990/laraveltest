@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'guest' => [
             \App\Http\Middleware\RedirectIfAuthenticated::class,
             ],
+        'prevent.logout.get' => \App\Http\Middleware\PreventLogoutDirectAccess::class,
     ];
     /**
      * The application's middleware aliases.

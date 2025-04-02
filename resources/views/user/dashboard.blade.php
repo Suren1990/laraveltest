@@ -17,6 +17,7 @@
                 <a href="{{ route('post.index') }}" class="ml-6 text-lg text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out">Post</a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf
+                method('DELETE')
                     <button type="submit" class="ml-6 text-lg text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out">
                     Logout
                     </button>
@@ -26,6 +27,9 @@
         </div>
     </header>
     <main class="items-center justify-center min-h-screen">
+    @if(session('username'))
+        <p>Hello {{ session('username') }}</p>
+    @endif
     @yield('content')
     </main>
 </body>

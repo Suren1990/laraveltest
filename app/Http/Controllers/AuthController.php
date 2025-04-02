@@ -12,15 +12,21 @@ use App\Http\Requests\User\LoginRequest;
 
 class AuthController extends Controller
 {
+    public function index(){
+
+        return view('user.home');   
+    }
+
     public function createRegistration(){
+
     return view('user.registration');
     } 
 
     public function storeRegistration(RegisterRequest $request){
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        $user = User::create($data);
-         
+        User::create($data);
+
          return redirect('/');
      }
 
@@ -28,21 +34,25 @@ class AuthController extends Controller
         return view('user.login');
      }
 
-     public function storeLogin(LoginRequest $request)
-    {
+     public function storeLogin(LoginRequest $request){
          $data = $request->only('email', 'password');
         if (Auth::attempt($data)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('username', Auth::user()->username);
         }
-
+        
         return redirect('/registration');
     }
 
+    public function createDashboard(){
+
+        return view('user.dashboard');
+     }
+
     public function loginDestroy(Request $request){
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/'); 
+    
+        return redirect('/');  
     }
 }
+// $request->session()->invalidate();
+        // $request->session()->regenerateToken();

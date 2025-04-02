@@ -20,6 +20,6 @@
                 </div>
                 <button type="submit" class="w-full bg-gray-900 text-white py-3 rounded-lg shadow-md hover:bg-gray-800 transition duration-300 ease-in-out">Login</button>
             </form>
-            <p class="mt-4 text-center text-sm text-gray-600">Don't have an account? <a href="{{ route('registration') }}" class="text-gray-900 hover:text-gray-700">Register</a></p>
+            <p class="mt-4 text-center text-sm text-gray-600">Don't have an account? <a href="{{ route('create.registration') }}" class="text-gray-900 hover:text-gray-700">Register</a></p>
         </div>
 @endsection

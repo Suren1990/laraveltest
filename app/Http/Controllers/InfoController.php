@@ -7,9 +7,9 @@ use App\Models\NewUser;
 class InfoController extends Controller
 {
     public function index(){
-        $users = NewUser::all();  // Получаем коллекцию всех пользователей
+        $users = NewUser::all();
 
-// Преобразуем коллекцию в массив данных
+
         $usersArray = $users->toArray();
         foreach($usersArray as $el){
             dump($el);

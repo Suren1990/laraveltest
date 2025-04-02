@@ -1,10 +1,12 @@
-@extends('user.dashboard')
-@section('title', 'Post')
-@section('content')
+    @extends('user.dashboard')
+    @section('title', 'Post')
+    @section('content')
 
-<div class="container mx-auto p-8">
-    <div class="flex justify-end mb-6">
-        <a href="{{ route('post.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Create New Post</a>
+    <div class="container mx-auto p-8">
+    <div class="flex justify-end mb-6 space-x-4">
+        <a href="{{ route('post.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">
+        Create New Post
+        </a>
     </div>
         <h2 class="text-3xl font-semibold text-gray-900 mb-6">Select Author</h2>
         <form method="GET" action="{{ route('post.index') }}" class="mb-6 flex space-x-4">
@@ -36,7 +38,11 @@
                 <h3 class="text-1xl font-semibold text-red-800 mb-4">Created By: {{ $post->creator ? $post->creator->username : 'Unknown' }}</h3>
                 <h3 class="text-1xl font-semibold text-red-800 mb-4"> {{ $post->updater ?  'Updaeted By :'.($post->updater->username):''}}</h3>
                 <a href="{{ route('post.show', $post->id) }}" class="text-blue-500 hover:text-blue-700 transition duration-300">Change Post</a>
-
+                <div class="mt-4">  
+                    @foreach($post->tags as $tag)
+                        <span class="text-blue-500">#{{ $tag->title }}</span>
+                    @endforeach 
+                </div>
             </div>
             @endforeach
             
@@ -45,9 +51,9 @@
     <div class="flex justify-center mt-8>"
         {{$posts->withQueryString()->links()}}
     </div>
-</div>
+    </div>
     </div>
 
 
 
-@endsection
+    @endsection
